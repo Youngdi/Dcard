@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/Dcard.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="js/angular.js"></script>
+    <script src="js/timer.js"></script>
+
+    <!--     <script src="http://isotope.metafizzy.co/jquery.isotope.min.js"></script> -->
+
+</head>
+
+<body>
+    <!--        <nav class="navbar navbar-inverse navbar-primary navbar-fixed-top" role="navigation">
+            <a class="navbar-brand" href="#">Title</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Link</a>
+                </li>
+            </ul>
+        </nav> -->
+
+    <!--     <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo" ng-click="onClickNavigationItem('Index')">
+                    </a>
+                </div>
+                <div id="menu_collapse" ng-cloak ng-show="!status.isLogin" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{active:menu.forum}" ng-click="onClickNavigationItem('forum')"><a href="/f"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li ng-class="{active:menu.noob}" ng-click="onClickNavigationItem('noob');"><a href="/f/dcard/p/59152"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                        <li ng-show="isLoading" ><a href=""><i class="tello-spin4 animate-spin"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li ng-class="{active:menu.apply}" ng-click="onClickNavigationItem('apply')"><a href="/apply">註冊</a>
+                        </li>
+                        <li ng-class="{active:menu.login}" ng-click="onClickNavigationItem('login')"><a href="/login">登入</a>
+                        </li>
+                    </ul>
+                </div> -->
+
+    <div ng-hide="fullWidth">
+        <a class="btn btn-xs btn-default" id="feedback" target="_blank" href="http://goo.gl/Ekru2U"><i class="fa fa-bullhorn"></i> Feedback</a>
+    </div>
+    <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" style="background-color:#266D96" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo" ng-click="onClickNavigationItem('Index')">
+                    </a>
+                </div>
+                <style>
+                #notification-ul {
+                    background-color: #f5f5f5;
+                }
+                #notification-li {
+                    line-height: 1.5em;
+                    width: 300px;
+                    position: relative;
+                }
+                #norification-container {
+                    width: 300px;
+                    height: 352px;
+                    overflow: hidden;
+                }
+                #norification-container > div {
+                    width: 318px;
+                    height: 352px;
+                    overflow-y: scroll;
+                }
+                #norification-container div ul {
+                    padding: 0px;
+                }
+                .notification-list {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list p {
+                    position: relative;
+                    float: left;
+                    width: 230px;
+                    margin-left: 0px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .no-forum-notification {
+                    padding: 10px;
+                    padding-right: 30px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    color: #cccccc;
+                }
+                /*for mobile*/
+                
+                #notification-container-phone {
+                    width: 100%;
+                    height: auto;
+                }
+                #notification-container-phone > ul {
+                    background-color: #f5f5f5;
+                    padding: 0px;
+                }
+                .notification-list-phone {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list-phone:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list-phone:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list-phone img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list-phone p {
+                    position: relative;
+                    float: left;
+                    width: 240px;
+                    margin-left: 6px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .navbar-nar li {
+                    color: white;
+                }
+                </style>
+
+                <div id="menu_collapse" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-book"></i> Dcard <span class="badge badge-important">1</span></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-users"></i> 朋友</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></span> 我<i class="fa fa-angle-down"></i></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/me">編輯我的 Dcard</a>
+                                </li>
+                                <li><a href="/anniversary">回顧三年</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a target="_self" href="/logout">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></i><span class="hidden-desktop"> 信箱</span> <span class="badge badge-important"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></span> 通知<span style="background-color:#c0392b;" class="badge"></span></span></a>
+                            <ul id="notification-ul" class="dropdown-menu">
+                                <li id="notification-li">
+                                    <div id="norification-container" class="hidden-xs">
+                                        <div>
+                                            <ul>
+                                                <a>
+                                                    <li class="notification-list"><img src="wangcation.jpg" alt="">
+                                                        <p>
+                                                            <span>
+                                                            {{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                                                       </p></span>
+                                                            <div class="clearfix"></div>
+                                                    </li>
+                                                </a>
+                                            </ul>
+                                            <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="notification-container-phone" class="visible-xs">
+                                    <ul>
+                                        <a ng-repeat="noti in notification" ng-click="noti_seen(noti)" ng-href="{{'/f/'+noti.post.category+'/p/'+noti.post.id}}">
+                                            <li class="notification-list-phone" ng-class="{read:noti.isSeen}"><img src="wangcation.jpg" alt="">
+                                                <p>
+                                                    <span>{{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                </p></span>
+                                                    <div class="clearfix"></div>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                    <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                </div>
+                                <li class="divider" style="margin-top:0px;"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div class="container">
+            <div class="col-lg-7 visible-lg">
+                <div>
+                    <span ng-bind="tip" style="color:#bbb;line-height:43px;"></span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5">
+                <div ng-app="MyApp" class="timer">
+                    <timer interval="1000" countdown="86400" />
+                    <span class="timer-desc" class="pull-right">距離午夜倒數</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{hours}}</span>Hours</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{minutes}}</span>Minutes</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{seconds}}</span>Seconds</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{hours}}</span>h</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{minutes}}</span>m</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{seconds}}</span>s</span>
+                    </timer>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="width:100%;">
+        <!--             紅色綠色要跟著一起做變化，他們兩個高度要一樣，如此一來動態加入的資料才能有背景 -->
+        <div id="container" class="AAA  col-xs-12 col-md-12" style="min-height:600px; max-width:1210px;">
+            <style>
+            .AAA {
+                background-color: #EBEBEB;
+                padding: 10px;
+                border-radius: 3px;
+            }
+            .well {
+                /*min-height: 285px;*/
+                padding: 8px;
+            }
+            .department {
+                min-height: 50px;
+            }
+            </style>
+<!--             <div class="col-md-2 col-sm-4 col-xs-6 item">
+                <div class="well">
+                    <a href="friend/42888">
+                        <div class="photo"><img class="img-responsive" alt="" src="img/wang.jpg">
+                        </div>
+                        <h6>王美淋</h6>
+                        <div class="department">淡江大學資訊管理學系</div>
+                    </a>
+                </div>
+            </div> -->
+        </div>
+        <div id="goToTop"><a class="scroll-to-top scroll-show" href="#" onclick="hide();"><i class="fa fa-chevron-up"></i></a>
+        </div>
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/fit-columns.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <!---->
+        <script>
+        //<------ 這邊是做出初始化元件的地方 ------>
+
+        angular.module('MyApp', ['timer']);
+        var is_loading = false; // initialize is_loading by false to accept new loading 判斷要不要載入資料
+        var limit = 12; // limit items per page 從資料庫一次讀幾筆，讓使用者不用一次載入全部
+        var last_id = 0;  //去記錄載完最後一筆是哪一個，之後從資料庫載她的後面的資料出來
+        $('#loader').hide();
+        $('#noresult').hide();
+        $('.scroll-to-top').hide();
+
+        //<------ 這邊是做出初始化元件的地方 ------>
+
+        $(function() {
+            //<------ 這邊是黏在右下角的往上彈按鈕的觸發事件 ------>
+            $('#goToTop a').click(function() {
+                $('html,body').animate({
+                    scrollTop: 0
+                }, 'slow');
+            });
+            //<------ 這邊是黏在右下角的往上彈按鈕的觸發事件 ------>
+            var $container = $('#container');
+            // <--這邊是先把預設的資料載出來-->
+            $.ajax({
+                url: 'load_more.php',
+                type: 'GET',
+                data: {
+                    last_id: last_id,
+                    limit: limit
+                },
+                success: function(data) {
+                    var jsonString = data;
+                    var result = JSON.parse(jsonString);
+                    last_id = result.last_id;
+                    $('#loader').hide();
+                    // append: add the new statments to the existing data
+                    $.each(result.data, function(index, val) {
+                        $('#container').append('<div class="col-md-2 col-sm-4 col-xs-6 item"><div class="well"><a href="friend/42888"><div class="photo"><img class="img-responsive" alt="" src="img/wang.jpg"></div><h6>' + val.id + '王美淋</h6><div class="department">淡江大學資訊管理學系</div></a></div></div>');
+                    });
+                    //將ajax出來的資料載入waterfall的排版套件isotope
+                    $container.isotope({
+                        itemSelector: '.item',
+                        masonry: {
+                            columnWidth: 0,
+                            isFitWidth: true
+                        }
+                    });
+                    //將ajax出來的資料載入waterfall的排版套件isotope
+                }
+            });
+            // <--這邊是先把預設的資料載出來-->
+
+            // // <--這邊是往下拉會動態增加資料用window.scroll去控制-->
+            $(window).scroll(function() {
+                //<------ 這邊是黏在右下角的往上彈按鈕 ------>
+                if ($(this).scrollTop() > 500) { //当window的scrolltop距离大于1时，go to top按钮淡出，反之淡入
+                    $("#goToTop").fadeIn();
+                } else {
+                    $("#goToTop").fadeOut();
+                }
+                //<------ 這邊是黏在右下角的往上彈按鈕 ------>
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    if (is_loading == false) { // stop loading many times for the same page
+                        // set is_loading to true to refuse new loading
+                        is_loading = true;
+                        // display the waiting loader
+                        $('.scroll-to-top').show();
+                        $('#loader').show();
+                        // execute an ajax query to load more statments
+                        $.ajax({
+                            url: 'load_more.php',
+                            type: 'GET',
+                            data: {
+                                last_id: last_id,
+                                limit: limit
+                            },
+                            success: function(data) {
+                                var jsonString = data;
+                                if (jsonString == "No") {
+                                    $('#noresult').show();
+                                    $('#loader').hide();
+                                } else {
+                                    var result = JSON.parse(jsonString);
+                                    last_id = result.last_id;
+                                    // now we have the response, so hide the loader
+                                    $('#loader').hide();
+                                    var $addItemString = "";
+                                    // append: add the new statments to the existing data
+                                    $.each(result.data, function(index, val) {
+                                        $addItemString = $addItemString + '<div class="col-md-2 col-sm-4 col-xs-6 item"><div class="well"><a href="friend/42888"><div class="photo"><img class="img-responsive" alt="" src="img/wang.jpg"></div><h6>' + val.id + '王美淋</h6><div class="department">淡江大學資訊管理學系</div></a></div></div>';
+                                    });
+                                    //<---將新載入的ajax資料載入waterfall的排版套件isotope利用他的語法isert，但要注意要包成$()的物件。----->
+                                    var $addItemFix = $($addItemString);
+                                    // console.log($addItemString);
+                                    $container.isotope('insert', $addItemFix);
+                                    //<---將新載入的ajax資料載入waterfall的排版套件isotope利用他的語法isert，但要注意要包成$()的物件。----->
+                                }
+                                // set is_loading to false to accept new loading
+                                is_loading = false;
+                            }
+                        });
+                    }
+                }
+            });
+            // <--這邊是往下拉會動態增加資料用windox.scroll去控制-->
+        });
+        </script>
+</body>
+
+</html>

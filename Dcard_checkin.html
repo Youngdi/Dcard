@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/Dcard.css">
+    <!--  <link rel="stylesheet" type="text/css" href="css/Dcard.css"> -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="js/angular.js"></script>
+    <script src="js/timer.js"></script>
+
+</head>
+
+<body>
+    <!-- 黏在最左邊的按鈕 -->
+    <div>
+        <!-- target="_blank"(點擊時會開啟新的頁面) -->
+        <a class="btn btn-xs btn-default" id="feedback" target="_blank" href="http://goo.gl/Ekru2U"><i class="fa fa-bullhorn"></i> Feedback</a>
+    </div>
+    <!-- /黏在最左邊的按鈕 -->
+    <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" style="background-color:#266D96" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo">
+                    </a>
+                </div>
+                <style>
+                #notification-ul {
+                    background-color: #f5f5f5;
+                }
+                #notification-li {
+                    line-height: 1.5em;
+                    width: 300px;
+                    position: relative;
+                }
+                #norification-container {
+                    width: 300px;
+                    height: 352px;
+                    overflow: hidden;
+                }
+                #norification-container > div {
+                    width: 318px;
+                    height: 352px;
+                    overflow-y: scroll;
+                }
+                #norification-container div ul {
+                    padding: 0px;
+                }
+                .notification-list {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list p {
+                    position: relative;
+                    float: left;
+                    width: 230px;
+                    margin-left: 0px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .no-forum-notification {
+                    padding: 10px;
+                    padding-right: 30px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    color: #cccccc;
+                }
+                /*for mobile*/
+                
+                #notification-container-phone {
+                    width: 100%;
+                    height: auto;
+                }
+                #notification-container-phone > ul {
+                    background-color: #f5f5f5;
+                    padding: 0px;
+                }
+                .notification-list-phone {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list-phone:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list-phone:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list-phone img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list-phone p {
+                    position: relative;
+                    float: left;
+                    width: 240px;
+                    margin-left: 6px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .navbar-nar li {
+                    color: white;
+                }
+                </style>
+
+                <div id="menu_collapse" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-book"></i> Dcard 
+                        <span class="badge badge-important">1</span></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-users"></i> 朋友</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></span> 我<i class="fa fa-angle-down"></i></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">編輯我的 Dcard</a>
+                                </li>
+                                <li><a href="#">回顧三年</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a target="_self" href="/logout">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-envelope"></i>信箱
+                                <span class="badge badge-important">1</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell"></i> 通知
+                                <span style="background-color:#c0392b;" class="badge">1</span>
+                            </a>
+                            <ul id="notification-ul" class="dropdown-menu">
+                                <li id="notification-li">
+                                    <div id="norification-container" class="hidden-xs">
+                                        <div>
+                                            <ul>
+                                                <a>
+                                                    <li class="notification-list">
+                                                        <div class="clearfix"></div>
+                                                    </li>
+                                                </a>
+                                            </ul>
+                                            <h2 class="no-forum-notification">已看完所有通知</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="notification-container-phone" class="visible-xs">
+                                    <ul>
+                                        <a>
+                                            <li class="notification-list-phone">
+                                                <div class="clearfix"></div>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                    <h2 class="no-forum-notification">已看完所有通知</h2>
+                                </div>
+                                <li class="divider" style="margin-top:0px;"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div class="container">
+            <div class="col-lg-7 visible-lg">
+                <div>
+                    <span style="color:#bbb;line-height:43px;"></span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5">
+                <div ng-app="MyApp" class="timer">
+                    <timer interval="1000" countdown="86400" />
+                    <span class="timer-desc" class="pull-right">距離午夜倒數</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{hours}}</span>Hours</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{minutes}}</span>Minutes</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{seconds}}</span>Seconds</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{hours}}</span>h</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{minutes}}</span>m</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{seconds}}</span>s</span>
+                    </timer>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container" style="width:100%;">
+        <div class="AAA col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:600px;">
+            <style>
+            .AAA {
+                background-color: #EBEBEB;
+                padding: 20px;
+                border-radius: 3px;
+            }
+            </style>
+            <div style="padding:70px 0px;">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                </div>
+                <div class="col-md-4 ">
+                    <div style="text-align:center">
+                        <img style="width:300px" src="img/login-big-logo.png" height="447" class="img-responsive img-responsive-center">
+                    </div>
+                    <hr>
+                    <style>
+                    #login-panel input[type=submit] {
+                        width: 100%;
+                    }
+                    </style>
+                    <form id="login-panel" method="POST">
+                        <label for="">學校信箱</label>
+                        <input class="form-control email" type="text" name="email">
+                        <label for="">密碼</label>
+                        <input class="form-control password" type="password" name="password">
+                        <br>
+                        <a class="pull-right" style="font-size:75%;" href="#">忘記密碼?</a>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <input type="submit" value="登入" class="btn btn-primary">
+                    </form>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!---->
+    <script>
+    angular.module('MyApp', ['timer']);
+    </script>
+</body>
+
+</html>

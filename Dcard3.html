@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/Dcard.css">
+    <!--  <link rel="stylesheet" type="text/css" href="css/Dcard.css"> -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="js/angular.js"></script>
+    <script src="js/timer.js"></script>
+    <script type="js/jquery-ias.min.js"></script>
+
+</head>
+
+<body>
+    <!--        <nav class="navbar navbar-inverse navbar-primary navbar-fixed-top" role="navigation">
+            <a class="navbar-brand" href="#">Title</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Link</a>
+                </li>
+            </ul>
+        </nav> -->
+
+    <!--     <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo" ng-click="onClickNavigationItem('Index')">
+                    </a>
+                </div>
+                <div id="menu_collapse" ng-cloak ng-show="!status.isLogin" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ng-class="{active:menu.forum}" ng-click="onClickNavigationItem('forum')"><a href="/f"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li ng-class="{active:menu.noob}" ng-click="onClickNavigationItem('noob');"><a href="/f/dcard/p/59152"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                        <li ng-show="isLoading" ><a href=""><i class="tello-spin4 animate-spin"></i></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li ng-class="{active:menu.apply}" ng-click="onClickNavigationItem('apply')"><a href="/apply">註冊</a>
+                        </li>
+                        <li ng-class="{active:menu.login}" ng-click="onClickNavigationItem('login')"><a href="/login">登入</a>
+                        </li>
+                    </ul>
+                </div> -->
+
+    <div ng-hide="fullWidth">
+        <a class="btn btn-xs btn-default" id="feedback" target="_blank" href="http://goo.gl/Ekru2U"><i class="fa fa-bullhorn"></i> Feedback</a>
+    </div>
+    <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" style="background-color:#266D96" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo" ng-click="onClickNavigationItem('Index')">
+                    </a>
+                </div>
+                <style>
+                #notification-ul {
+                    background-color: #f5f5f5;
+                }
+                #notification-li {
+                    line-height: 1.5em;
+                    width: 300px;
+                    position: relative;
+                }
+                #norification-container {
+                    width: 300px;
+                    height: 352px;
+                    overflow: hidden;
+                }
+                #norification-container > div {
+                    width: 318px;
+                    height: 352px;
+                    overflow-y: scroll;
+                }
+                #norification-container div ul {
+                    padding: 0px;
+                }
+                .notification-list {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list p {
+                    position: relative;
+                    float: left;
+                    width: 230px;
+                    margin-left: 0px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .no-forum-notification {
+                    padding: 10px;
+                    padding-right: 30px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    color: #cccccc;
+                }
+                /*for mobile*/
+                
+                #notification-container-phone {
+                    width: 100%;
+                    height: auto;
+                }
+                #notification-container-phone > ul {
+                    background-color: #f5f5f5;
+                    padding: 0px;
+                }
+                .notification-list-phone {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list-phone:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list-phone:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list-phone img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list-phone p {
+                    position: relative;
+                    float: left;
+                    width: 240px;
+                    margin-left: 6px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .navbar-nar li {
+                    color: white;
+                }
+                </style>
+
+                <div id="menu_collapse" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-book"></i> Dcard <span class="badge badge-important">1</span></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-users"></i> 朋友</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></span> 我<i class="fa fa-angle-down"></i></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/me">編輯我的 Dcard</a>
+                                </li>
+                                <li><a href="/anniversary">回顧三年</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a target="_self" href="/logout">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></i><span class="hidden-desktop"> 信箱</span> <span class="badge badge-important"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></span> 通知<span style="background-color:#c0392b;" class="badge"></span></span></a>
+                            <ul id="notification-ul" class="dropdown-menu">
+                                <li id="notification-li">
+                                    <div id="norification-container" class="hidden-xs">
+                                        <div>
+                                            <ul>
+                                                <a>
+                                                    <li class="notification-list"><img src="//dwacw1i50iu04.cloudfront.net/img/dcard_nofication.jpg" alt="">
+                                                        <p>
+                                                            <span>
+                                                            {{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                                                       </p></span>
+                                                            <div class="clearfix"></div>
+                                                    </li>
+                                                </a>
+                                            </ul>
+                                            <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="notification-container-phone" class="visible-xs">
+                                    <ul>
+                                        <a ng-repeat="noti in notification" ng-click="noti_seen(noti)" ng-href="{{'/f/'+noti.post.category+'/p/'+noti.post.id}}">
+                                            <li class="notification-list-phone" ng-class="{read:noti.isSeen}"><img src="//dwacw1i50iu04.cloudfront.net/img/dcard_nofication.jpg" alt="">
+                                                <p>
+                                                    <span>{{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                </p></span>
+                                                    <div class="clearfix"></div>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                    <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                </div>
+                                <li class="divider" style="margin-top:0px;"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div class="container">
+            <div class="col-lg-7 visible-lg">
+                <div>
+                    <span ng-bind="tip" style="color:#bbb;line-height:43px;"></span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5">
+                <div ng-app="MyApp" class="timer">
+                    <timer interval="1000" countdown="86400" />
+                    <span class="timer-desc" class="pull-right">距離午夜倒數</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{hours}}</span>Hours</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{minutes}}</span>Minutes</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{seconds}}</span>Seconds</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{hours}}</span>h</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{minutes}}</span>m</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{seconds}}</span>s</span>
+                    </timer>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="width:100%;">
+        <div class="AAA col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:500px;">
+            <style>
+            .AAA {
+                background-color: #EBEBEB;
+                padding: 20px;
+                border-radius: 3px;
+            }
+            </style>
+
+            <!-- uiView: sec -->
+            <section ui-view="sec" class=""></section>
+            <!-- uiView:  -->
+            <section ui-view="" class=""><a class="scroll-to-top hidden-xs ng-scope"><i class="fa fa-chevron-up"></i></a>
+
+
+                <!-- 左邊網頁版分類看板開始 -->
+                <div id="side" class="">
+                    <div class="title">分類看板</div>
+                    <!-- ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/all/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/all/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">全部</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/talk/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/talk/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">閒聊</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/trending/1/" class="item active" ng-class="{'active': $index == forumCategoryEntry}" href="/f/trending/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">時事</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/funny/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/funny/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">有趣</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/music/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/music/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">音樂</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/movie/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/movie/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">電影</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/bg/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/bg/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">男女</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/mood/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/mood/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">心情</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/sex/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/sex/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">西斯</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/food/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/food/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">美食</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-show="postType" class="ng-scope ng-hide"><a ng-href="/f/dcard/1/" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/dcard/1/"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">Dcard</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <!-- ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/all" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/all"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">全部</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/talk" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/talk"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">閒聊</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/trending" class="item active" ng-class="{'active': $index == forumCategoryEntry}" href="/f/trending"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">時事</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/funny" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/funny"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">有趣</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/music" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/music"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">音樂</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/movie" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/movie"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">電影</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/bg" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/bg"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">男女</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/mood" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/mood"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">心情</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/sex" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/sex"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">西斯</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/food" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/food"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">美食</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                    <div ng-repeat="forum in forums" ng-click="setForumIndex($index)" ng-hide="postType" class="ng-scope"><a ng-href="/f/dcard" class="item" ng-class="{'active': $index == forumCategoryEntry}" href="/f/dcard"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">Dcard</span></a>
+                    </div>
+                    <!-- end ngRepeat: forum in forums -->
+                </div>
+                <!-- 左邊網頁版分類看板結束 -->
+
+
+                <!-- 這邊是左邊的手機下拉式分類欄開始 -->
+                <div class="list">
+                    <h2 class="forum-title ng-binding" ng-bind="currentForum.name">時事</h2>
+                    <div class="btn-group forum-dropdown dropdown">
+                        <button type="button" class="btn btn-default btn-standalone dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span ng-bind="currentForum.name" class="ng-binding">時事</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu forum-dropdown-menu">
+                            <!-- ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/all/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/all/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">全部</span></a>
+                                <a ng-href="/f/all" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/all" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">全部</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/talk/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/talk/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">閒聊</span></a>
+                                <a ng-href="/f/talk" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/talk" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">閒聊</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/trending/1/" ng-show="postType" class="item ng-hide active" ng-class="{active: forum.alias == currentForum.alias}" href="/f/trending/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">時事</span></a>
+                                <a ng-href="/f/trending" ng-hide="postType" class="item active" ng-class="{active: forum.alias == currentForum.alias}" href="/f/trending" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">時事</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/funny/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/funny/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">有趣</span></a>
+                                <a ng-href="/f/funny" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/funny" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">有趣</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/music/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/music/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">音樂</span></a>
+                                <a ng-href="/f/music" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/music" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">音樂</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/movie/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/movie/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">電影</span></a>
+                                <a ng-href="/f/movie" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/movie" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">電影</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/bg/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/bg/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">男女</span></a>
+                                <a ng-href="/f/bg" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/bg" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">男女</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/mood/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/mood/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">心情</span></a>
+                                <a ng-href="/f/mood" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/mood" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">心情</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/sex/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/sex/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">西斯</span></a>
+                                <a ng-href="/f/sex" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/sex" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">西斯</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/food/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/food/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">美食</span></a>
+                                <a ng-href="/f/food" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/food" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">美食</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                            <li ng-repeat="forum in forums" class="ng-scope">
+                                <a ng-href="/f/dcard/1/" ng-show="postType" class="item ng-hide" ng-class="{active: forum.alias == currentForum.alias}" href="/f/dcard/1/" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">Dcard</span></a>
+                                <a ng-href="/f/dcard" ng-hide="postType" class="item" ng-class="{active: forum.alias == currentForum.alias}" href="/f/dcard" in_tag="ul" kaspersky_status="skipped"><span class="circle" ng-style="forum.unreadColor"></span>&nbsp;<span ng-bind="forum.name" class="ng-binding">Dcard</span></a>
+                            </li>
+                            <!-- end ngRepeat: forum in forums -->
+                        </ul>
+                    </div>
+                    <!-- 這邊是左邊的手機下拉式分類欄結束 -->
+
+                    <div class="btn-group right btn-standalone">
+                        <button type="button" class="btn btn-default" ng-click="changePostType('popular')" ng-class="{active: postType==='popular'}">熱門</button>
+                        <button type="button" class="btn btn-default active" ng-click="changePostType('')" ng-class="{active: postType===''}">最新</button>
+                    </div>
+
+                    <button type="button" class="btn btn-default btn-standalone right" ng-click="showSearch()" ng-class="{active: showSearchArea}"><i class="fa fa-search"></i>搜尋</button>
+
+                    <div class="right ng-scope" ng-show="currentForum.alias!=='all'" tooltip="">
+                        <button type="button" class="btn btn-primary btn-standalone btn-wide right" ng-click="setShowForm()" close="loginModalClose()" ng-disabled="!createPost" ng-class="{active: showFormArea}"><i class="fa fa-pencil"></i>發表</button>
+                    </div>
+                    <div ng-show="showSearchArea" class="ng-hide">
+                        <gcse:search></gcse:search>
+                    </div>
+
+                    <div id="write-post" ng-show="showFormArea" class="ng-hide">
+                        <br>
+
+                        <input type="text" class="form-control ng-isolate-scope ng-pristine ng-valid" ng-hide="showPreview" placeholder="標題(請詳述否則會刪文！請讓人可以看標題就知道文章大概在講什麼)" ng-model="postTitle" local-draft="postTitle" focus-me="showFormArea">
+                        <textarea class="form-control ng-isolate-scope ng-pristine ng-valid" rows="12" placeholder="供討論時事話題，如話題有相關看板，請至該版發文。標題請詳述勿空泛，讓你的文章被大家重視。最後禁止徵友，請對方加你 Dcard，回覆請尊重作者勿歪樓(除非作者同意)" ng-model="postContent" ng-hide="showPreview" local-draft="postContent"></textarea>
+                        <h3 ng-show="showPreview" ng-bind="postTitle" class="ng-binding ng-hide"></h3>
+                        <p ng-show="showPreview" ng-bind-html="postContent | linky:'_blank' | imgur : 600 | youtube | newlines2" class="ng-binding ng-hide"></p>
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <button type="button" class="btn btn-default ladda-button" data-ui-ladda="uploadPostPicture" data-style="expand-right" data-spinner-color="#9fa8d0" ng-file-select="uploadPictures($files, 'post')" multiple="" accept="image/*" style="overflow: hidden;"><span class="ladda-label">上傳圖片</span><span class="ladda-spinner"></span>
+                                    <input type="file" class="btn btn-default ladda-button" data-ui-ladda="uploadPostPicture" data-style="expand-right" data-spinner-color="#9fa8d0" ng-file-select="uploadPictures($files, 'post')" multiple="multiple" accept="image/*" __wrapper_for_parent_="true" style="width: 1px; height: 1px; opacity: 0; position: absolute; padding: 0px; margin: 0px; overflow: hidden;">
+                                </button>
+                                <button type="button" class="btn btn-default" ng-hide="showPreview" ng-click="showPreview=!showPreview" ng-disabled="!postContent.length || !postTitle.length" disabled="disabled">預覽</button>
+                                <button type="button" class="btn btn-default ng-hide" ng-show="showPreview" ng-click="showPreview=!showPreview">返回編輯</button>
+                                <button type="button" class="btn btn-primary ladda-button" data-ui-ladda="postLoading" data-style="expand-right" ng-disabled="!postContent.length || !postTitle.length || (currentForum.alias==='all'&amp;&amp;postForumAlias==='all')" ng-click="submitPost()" disabled="disabled"><span class="ladda-label">送出</span><span class="ladda-spinner"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="anonymous" class="ng-pristine ng-valid"><span ng-bind-template="匿名發文（隱藏系級）" class="ng-binding">匿名發文（隱藏系級）</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="first-place-holder hidden-xs" style="width: auto; height: auto;">
+                        <div class="first" forum-first-affix="">
+                            <div class="first-like"><i class="fa fa-heart-o"></i>
+                            </div>
+                            <div class="first-comment"><i class="fa fa-comment-o"></i>
+                            </div>
+                            <div class="first-title">主題</div>
+                            <div class="first-author" ng-style="{width: currentForum.alias!=='all' ? '40%' : '25%'}" style="width: 40%;">作者</div>
+                            <div class="first-forum ng-hide" ng-style="{width: currentForum.alias!=='all' ? '0%' : '15%'}" ng-show="currentForum.alias==='all'" style="width: 0%;">討論區</div>
+                            <div class="first-create pull-right ng-binding" ng-bind-template="建立時間">建立時間</div>
+                        </div>
+                    </div>
+
+                    <div infinite-scroll="loadNextPage()" infinite-scroll-disabled="pageLoading||noMorePost">
+                        <!-- ngRepeat: post in posts -->
+                        <a class="item ng-scope unhighlight" href="#">
+                            <div class="item-like"><i class="fa fa-heart-o inline-icon"></i><span>70</span>
+                            </div>
+                            <div class="item-comment"><i class="fa fa-comment-o inline-icon"></i><span>10</span>
+                            </div>
+                            <div class="item-title overflow"><span class="circle"></span><span style="color: #B94A48;" class="">[置頂]&nbsp;&nbsp;</span><span>[公告]轉貼文章請將內文一併附上，不能只有一串網址</span>
+                            </div>
+
+                            <div class="text item-author">
+                                <div class="head" style="background-image: url(http://dwacw1i50iu04.cloudfront.net/img/girl.png);"></div>
+
+                                <div class="overflow" ng-bind-template="狄卡 ">狄卡 </div>
+                            </div>
+
+                            <div class="item-forum all ng-binding ng-hide" ng-show="currentForum.alias==='all'" ng-bind="post.forum_name">時事</div>
+                            <div class="item-create pull-right ng-binding">一個月前</div>
+                        </a>
+                        <!-- end ngRepeat: post in posts -->
+                        <a ng-repeat="post in posts" ng-href="/f/trending/p/68937" class="item ng-scope highlight" ng-class-odd="'unhighlight'" ng-class-even="'highlight'" ng-class="{'hover':($index == forumEntry) &amp;&amp; forumCategory}" ng-click="saveCurrentForum($index)" href="/f/trending/p/68937">
+                            <div class="item-like"><i class="fa fa-heart-o inline-icon"></i><span ng-bind="post.like" class="ng-binding">17</span>
+                            </div>
+                            <div class="item-comment"><i class="fa fa-comment-o inline-icon"></i><span ng-bind="post.comment" class="ng-binding">9</span>
+                            </div>
+                            <div class="item-title overflow"><span class="circle" ng-style="post.circleColor"></span><span ng-show="post.pinned&amp;&amp;currentForum.alias!=='all'" style="color: #B94A48;" class="ng-hide">[置頂]&nbsp;&nbsp;</span><span ng-bind="post.version[0].title" class="ng-binding">這裡有新店人嗎(幫高調</span>
+                            </div>
+
+                            <div class="text item-author" ng-class="{'all':currentForum.alias==='all'}">
+                                <div class="head" ng-style="{'background-image': 'url('+cdn+'/img/girl.png)'}" ng-show="post.member.gender !== 'M'" style="background-image: url(http://dwacw1i50iu04.cloudfront.net/img/girl.png);"></div>
+                                <div class="head ng-hide" ng-style="{'background-image': 'url('+cdn+'/img/boy.png)'}" ng-show="post.member.gender === 'M'" style="background-image: url(http://dwacw1i50iu04.cloudfront.net/img/boy.png);"></div>
+                                <div class="overflow ng-binding" ng-bind-template="文化大學 中國文學系">文化大學 中國文學系</div>
+                            </div>
+
+                            <div class="item-forum all ng-binding ng-hide" ng-show="currentForum.alias==='all'" ng-bind="post.forum_name">時事</div>
+                            <div class="item-create pull-right ng-binding" ng-bind="postType===''?post.createdAtFrom:post.updatedAtFrom">7小時前</div>
+                        </a>
+
+                        <!-- end ngRepeat: post in posts -->
+                        <a ng-repeat="post in posts" ng-href="/f/trending/p/67942" class="item ng-scope unhighlight" ng-class-odd="'unhighlight'" ng-class-even="'highlight'" ng-class="{'hover':($index == forumEntry) &amp;&amp; forumCategory}" ng-click="saveCurrentForum($index)" href="/f/trending/p/67942">
+                            <div class="item-like"><i class="fa fa-heart-o inline-icon"></i><span ng-bind="post.like" class="ng-binding">14</span>
+                            </div>
+                            <div class="item-comment"><i class="fa fa-comment-o inline-icon"></i><span ng-bind="post.comment" class="ng-binding">8</span>
+                            </div>
+                            <div class="item-title overflow"><span class="circle" ng-style="post.circleColor"></span><span ng-show="post.pinned&amp;&amp;currentForum.alias!=='all'" style="color: #B94A48;" class="ng-hide">[置頂]&nbsp;&nbsp;</span><span ng-bind="post.version[0].title" class="ng-binding">柯P轟鴻海財大氣粗　「財團怎麼可以如此囂張」</span>
+                            </div>
+
+                            <div class="text item-author" ng-class="{'all':currentForum.alias==='all'}">
+                                <div class="head ng-hide" ng-style="{'background-image': 'url('+cdn+'/img/girl.png)'}" ng-show="post.member.gender !== 'M'" style="background-image: url(http://dwacw1i50iu04.cloudfront.net/img/girl.png);"></div>
+                                <div class="head" ng-style="{'background-image': 'url('+cdn+'/img/boy.png)'}" ng-show="post.member.gender === 'M'" style="background-image: url(http://dwacw1i50iu04.cloudfront.net/img/boy.png);"></div>
+                                <div class="overflow ng-binding" ng-bind-template="淡江大學 ">淡江大學 </div>
+                            </div>
+
+                            <div class="item-forum all ng-binding ng-hide" ng-show="currentForum.alias==='all'" ng-bind="post.forum_name">時事</div>
+                            <div class="item-create pull-right">2天前</div>
+                        </a>
+                        <!-- end ngRepeat: post in posts -->
+                    </div>
+                    <!-- 載入更多文章的動態gif是包在Dcard.css裡 -->
+                    <div class="item alert alert-info" style="text-align: center;"><i class="tello-spin4 animate-spin"></i><span>載入更多文章中</span>
+                    </div>
+                    <!-- 載入更多文章的動態gif是包在Dcard.css裡 -->
+                    <div class="item alert alert-info " style="text-align: center;">沒有文章囉！</div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!---->
+    <script>
+    angular.module('MyApp', ['timer']);
+    </script>
+</body>
+
+</html>

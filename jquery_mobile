@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>flickr infinite masonry test</title>
+  <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
+    <script type="text/javascript" src="js/jquery.infinitescroll.min.js"></script>    	
+
+
+
+
+<script>
+$(function(){
+    
+    var $container = $('#container');
+    
+    $container.imagesLoaded(function(){
+      $container.masonry({
+        itemSelector: '.item',
+        columnWidth: 20,
+        isAnimated: true,
+        isFitWidth: true
+      });
+    });
+    
+    $container.infinitescroll({
+      navSelector  : 'div.nav',    // selector for the paged navigation 
+      nextSelector : 'div.nav a',  // selector for the NEXT link (to page 2)
+      itemSelector : '.item',     // selector for all items you'll retrieve
+      loading: {
+      	  img: '6RMhx.gif',
+		  msgText: 'loading....',
+		  finishedMsg: 'no more...'
+	    }
+      
+      },
+      // trigger Masonry as a callback
+      function( newElements ) {
+        // hide new items while they are loading
+        var $newElems = $( newElements ).css({ opacity: 0 });
+        // ensure that images load before adding to masonry layout
+        $newElems.imagesLoaded(function(){
+          // show elems now they're ready
+          $newElems.animate({ opacity: 1 });
+          $container.masonry( 'appended', $newElems, true ); 
+        });
+      }
+	);
+    
+});
+</script>
+	
+	
+	
+<style>
+	
+
+	
+.item {
+  background: none repeat scroll 0 0 #D8D5D2;
+  border-radius: 5px 5px 5px 5px;
+  width: 240px;
+  float: left;
+  padding: 5px;
+  margin: 5px;
+}
+
+.imgcenter {
+  text-align:center;
+}
+
+.clearbox{
+  clear: both;
+}
+
+#container {
+	margin: 0 auto;
+	border-radius: 5px;
+	clear: both;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+
+}
+
+
+#infscr-loading { 
+	text-align: center;
+	z-index: 100;
+	position: fixed;
+	margin-left: 40%;
+	bottom: 40px;
+	width: 200px;
+	padding: 10px;
+	background: #000; 
+	opacity: 0.8;
+	color: #FFF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.title {
+	font-size: 9pt;
+}
+
+.owner {
+	font-size: 9pt;
+}
+
+
+
+</style>	
+</head>
+<body>
+
+<div id='container'>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7320/15752772653_b8e13945cc_m.jpg' /><p class='title'>Have a Nice Day - Que Tengan Un Buen Día ☀️🌈</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/125262178@N03/' target='_blank'>125262178@N03</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8677/16186854057_b8f64cf233_m.jpg' /><p class='title'>rainbow</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8606/16186827677_a155f68c2f_m.jpg' /><p class='title'>✨Monday Motivation/Motivação de Segunda✨ 🌈🙏🍁🍂🍓🍊😛💛💛💛</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/89460889@N04/' target='_blank'>89460889@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8582/15752730833_de7e8faccb_m.jpg' /><p class='title'>Edited with ⛄️Vintique⛄️ app 👍 Photo by my friend @hakancelik and edited by me with Vintique 🙏🙏🙏 Used the "rainbow" filter (in Extra pack, 0.7 strength) of Vintique (iOS/Android) #vintique</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/122992685@N07/' target='_blank'>122992685@N07</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7341/16186508139_ec77129f29_m.jpg' /><p class='title'>rainbow-shine</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7362/15750191094_f627783cbd_m.jpg' /><p class='title'>Quiet time with my dog</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/42673937@N08/' target='_blank'>42673937@N08</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7415/16184934188_c6ae99fea5_m.jpg' /><p class='title'>Untitled-12</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/59110838@N02/' target='_blank'>59110838@N02</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8578/15752545523_9895699299_m.jpg' /><p class='title'>photo_20150126a_20</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/77812424@N03/' target='_blank'>77812424@N03</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7307/16346653376_86778fddb4_m.jpg' /><p class='title'>Double rainbow no final de semana</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/9036712@N05/' target='_blank'>9036712@N05</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7397/16371727772_2ca0251887_m.jpg' /><p class='title'>rainbow-kobukuro</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8126/8650415946_e7ee30304e_m.jpg' /><p class='title'>Water Droplet Refraction, Golden Bay, New Zealand</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/90380536@N06/' target='_blank'>90380536@N06</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7348/16370744101_f94f10d5a8_m.jpg' /><p class='title'>golden-rainbow-ost-part-1-ulala-session</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7459/16371544762_045ed97d84_m.jpg' /><p class='title'>Uploaded to Stockimo</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/26184191@N08/' target='_blank'>26184191@N08</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7313/16371551592_7543ba8b07_m.jpg' /><p class='title'>rainbow-2-cha-soo-kyung</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8650/16186271259_d0c656f56f_m.jpg' /><p class='title'>over-the-rainbow-globe</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8635/16346465506_3f4fed4b73_m.jpg' /><p class='title'>rainbow-koyote</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7353/15749994444_2a28658369_m.jpg' /><p class='title'>Rainbow’s End by AlisterBenn</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/101284110@N07/' target='_blank'>101284110@N07</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8666/16184807278_47b43e590b_m.jpg' /><p class='title'>dung-lai-hoac-buoc-tiep-rainbow-boys</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/130793175@N04/' target='_blank'>130793175@N04</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm9.static.flickr.com/8578/16184692018_c1fa159431_m.jpg' /><p class='title'>Dispersion of Light.</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/28101984@N07/' target='_blank'>28101984@N07</a></p></div></div>
+<div class='item'><div class='imgcenter'><img src='http://farm8.static.flickr.com/7370/16346403236_60dd1ed7d3_m.jpg' /><p class='title'>We think we have found the pot of gold at the the end of the rainbow! #johnarbontextiles #johnarbon #yarn #knitting #wool #viola #knittersofinstagram #merino</p><p class='owner'>owner: <a href='http://www.flickr.com/photos/128809415@N06/' target='_blank'>128809415@N06</a></p></div></div>
+</div>
+<div class='nav clearbox' >
+  <a href='/flickrsearch/index.php?p=2&q=rainbow'>.</a>
+</nav>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-438841-7']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  
+</script>
+</body>
+</html>

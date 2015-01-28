@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/Dcard.css">
+    <!--  <link rel="stylesheet" type="text/css" href="css/Dcard.css"> -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <script src="js/angular.js"></script>
+    <script src="js/timer.js"></script>
+    <script type="js/jquery-ias.min.js"></script>
+
+</head>
+
+<body>
+    <div ng-hide="fullWidth">
+        <a class="btn btn-xs btn-default" id="feedback" target="_blank" href="http://goo.gl/Ekru2U"><i class="fa fa-bullhorn"></i> Feedback</a>
+    </div>
+    <div ng-hide="noShowNavbar">
+        <nav class="navbar navbar-inverse navbar-default navbar-fixed-top" style="background-color:#266D96" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand active"><img src="img/logo.png" height="50" width="130" class="logo" ng-click="onClickNavigationItem('Index')">
+                    </a>
+                </div>
+                <style>
+                #notification-ul {
+                    background-color: #f5f5f5;
+                }
+                #notification-li {
+                    line-height: 1.5em;
+                    width: 300px;
+                    position: relative;
+                }
+                #norification-container {
+                    width: 300px;
+                    height: 352px;
+                    overflow: hidden;
+                }
+                #norification-container > div {
+                    width: 318px;
+                    height: 352px;
+                    overflow-y: scroll;
+                }
+                #norification-container div ul {
+                    padding: 0px;
+                }
+                .notification-list {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list p {
+                    position: relative;
+                    float: left;
+                    width: 230px;
+                    margin-left: 0px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .no-forum-notification {
+                    padding: 10px;
+                    padding-right: 30px;
+                    padding-bottom: 30px;
+                    text-align: center;
+                    color: #cccccc;
+                }
+                /*for mobile*/
+                
+                #notification-container-phone {
+                    width: 100%;
+                    height: auto;
+                }
+                #notification-container-phone > ul {
+                    background-color: #f5f5f5;
+                    padding: 0px;
+                }
+                .notification-list-phone {
+                    height: auto;
+                    min-height: 64px;
+                    position: relative;
+                    border-bottom: 1px #ddd solid;
+                    list-style-type: none;
+                    color: #418BCA;
+                }
+                .notification-list-phone:hover {
+                    background-color: #D2E1E9;
+                    cursor: pointer;
+                    color: #266D96;
+                }
+                .notification-list-phone:active {
+                    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                    -o-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+                }
+                .read {
+                    background-color: #ffffff;
+                }
+                .notification-list-phone img {
+                    float: left;
+                    margin: 6px;
+                    width: 51px;
+                    overflow-y: hidden;
+                }
+                .notification-list-phone p {
+                    position: relative;
+                    float: left;
+                    width: 240px;
+                    margin-left: 6px;
+                    margin-right: 6px;
+                    margin-top: 8px;
+                    line-height: 22px;
+                }
+                .navbar-nar li {
+                    color: white;
+                }
+                </style>
+
+                <div id="menu_collapse" class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#"><i class="fa fa-comments"></i> 校園聊天</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-book"></i> Dcard <span class="badge badge-important">1</span></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-users"></i> 朋友</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-info"></i> 新手須知</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></span> 我<i class="fa fa-angle-down"></i></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/me">編輯我的 Dcard</a>
+                                </li>
+                                <li><a href="/anniversary">回顧三年</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a target="_self" href="/logout">登出</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav  navbar-right">
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></i><span class="hidden-desktop"> 信箱</span> <span class="badge badge-important"></span></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="divider"></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i></span> 通知<span style="background-color:#c0392b;" class="badge"></span></span></a>
+                            <ul id="notification-ul" class="dropdown-menu">
+                                <li id="notification-li">
+                                    <div id="norification-container" class="hidden-xs">
+                                        <div>
+                                            <ul>
+                                                <a>
+                                                    <li class="notification-list"><img src="//dwacw1i50iu04.cloudfront.net/img/dcard_nofication.jpg" alt="">
+                                                        <p>
+                                                            <span>
+                                                            {{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                                                       </p></span>
+                                                            <div class="clearfix"></div>
+                                                    </li>
+                                                </a>
+                                            </ul>
+                                            <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                        </div>
+                                    </div>
+                                </li>
+                                <div id="notification-container-phone" class="visible-xs">
+                                    <ul>
+                                        <a ng-repeat="noti in notification" ng-click="noti_seen(noti)" ng-href="{{'/f/'+noti.post.category+'/p/'+noti.post.id}}">
+                                            <li class="notification-list-phone" ng-class="{read:noti.isSeen}"><img src="//dwacw1i50iu04.cloudfront.net/img/dcard_nofication.jpg" alt="">
+                                                <p>
+                                                    <span>{{"你追蹤的文章"+' "'+noti.post.title+'" '+" 有 "+noti.post.reply+" 個新回覆"}}
+                </p></span>
+                                                    <div class="clearfix"></div>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                    <h2 ng-hide="notification.length" class="no-forum-notification">已看完所有通知</h2>
+                                </div>
+                                <li class="divider" style="margin-top:0px;"></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div class="container">
+            <div class="col-lg-7 visible-lg">
+                <div>
+                    <span ng-bind="tip" style="color:#bbb;line-height:43px;"></span>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-5">
+                <div ng-app="MyApp" class="timer">
+                    <timer interval="1000" countdown="86400" />
+                    <span class="timer-desc" class="pull-right">距離午夜倒數</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{hours}}</span>Hours</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{minutes}}</span>Minutes</span>
+                    <span class="timer-unit mobile-hide"><span class="timer-number">{{seconds}}</span>Seconds</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{hours}}</span>h</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{minutes}}</span>m</span>
+                    <span class="timer-unit mobile-only-inline"><span class="timer-number">{{seconds}}</span>s</span>
+                    </timer>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+        <div class="container" style="width:100%;">
+            <div class="AAA col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:500px;">
+                <style>
+                .AAA {
+                    background-color: #EBEBEB;
+                    padding: 20px;
+                    border-radius: 3px;
+                }
+                </style>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <style>
+                        #apply input,
+                        #apply textarea {
+                            /*width: 98%;*/
+                        }
+                        #apply textarea {
+                            /*width: 96% !important;*/
+                            
+                            height: 200px;
+                        }
+                        #apply input.btn {
+                            width: 100%;
+                        }
+                        .error {
+                            color: red;
+                        }
+                        </style>
+                        <!-- <button class="btn" ng-click="autofill()">自動填入</button> -->
+                        <div class="alert alert-error">
+                            目前僅開放部分學校學生註冊，會逐漸開放，謝謝! &nbsp;&nbsp;&nbsp;&nbsp;<a ng-href="/resend" href="/resend">沒有收到驗證信?</a>
+                        </div>
+
+                        <!-- 從這邊下面開始是註冊的資料表 -->
+                        <div id="apply" name="applicant">
+                            <label for="">學校信箱</label>
+                            <input class="form-control" type="text" name="user">
+
+
+                            <label for="">密碼(4 - 12碼)</label>
+                            <input class="form-control" maxlength="12" type="password" name="password">
+
+
+                            <label for="">確認密碼</label>
+                            <input class="form-control" maxlength="12" type="password" name="password">
+
+
+                            <label for="name">真實姓名 (非真名會審核失敗)</label>
+                            <input class="form-control" type="text" name="username">
+
+
+                            <label for="gender">性別</label>
+                            <br>
+                            <select name="gender">
+                                <option value="?"></option>
+                                <option value="M">男</option>
+                                <option value="F">女</option>
+                            </select>
+                            <br>
+
+                            <label for="birthday">生日(MM/DD)</label>
+                            <input class="form-control" type="text" name="birthday" maxlength="5">
+
+                            <label for="school">學校</label>
+                            <br>
+                            <select>
+                                <option value="?" selected="selected"></option>
+                                <option value="0">嘉義大學</option>
+                                <option value="1">高雄大學</option>
+                                <option value="2">臺灣大學</option>
+                                <option value="3">政治大學</option>
+                                <option value="4">師範大學</option>
+                                <option value="5">清華大學</option>
+                                <option value="6">交通大學</option>
+                                <option value="7">成功大學</option>
+                                <option value="8">東吳大學</option>
+                                <option value="9">臺北醫學大學</option>
+                                <option value="10">淡江大學</option>
+                                <option value="11">輔仁大學</option>
+                                <option value="12">文化大學</option>
+                                <option value="13">實踐大學</option>
+                                <option value="14">世新大學</option>
+                                <option value="15">聯合大學</option>
+                                <option value="16">長庚大學</option>
+                                <option value="17">中原大學</option>
+                                <option value="18">中央大學</option>
+                                <option value="19">元智大學</option>
+                                <option value="20">海洋大學</option>
+                                <option value="21">陽明大學</option>
+                                <option value="22">中山大學</option>
+                                <option value="23">義守大學</option>
+                                <option value="24">國北護</option>
+                                <option value="25">臺北藝術大學</option>
+                                <option value="26">臺北教育大學</option>
+                                <option value="27">臺北市立大學</option>
+                                <option value="28">中興大學</option>
+                                <option value="29">中山醫學大學</option>
+                                <option value="30">中正大學</option>
+                                <option value="31">臺灣藝術大學</option>
+                                <option value="32">臺北大學</option>
+                                <option value="33">台科大</option>
+                                <option value="34">北科大</option>
+                                <option value="35">中科大</option>
+                                <option value="36">高雄第一科大</option>
+                                <option value="37">中央警察大學</option>
+                                <option value="38">東華大學</option>
+                                <option value="39">逢甲大學</option>
+                                <option value="40">東海大學</option>
+                                <option value="41">暨南大學</option>
+                            </select>
+                            <br>
+                            <br>
+                            <label for="department">系所 (請打完整名稱)</label>
+                            <input class="form-control" type="text">
+
+
+                            <label for="usualmail">常用信箱</label>
+                            <input class="form-control" type="text" name="usualmail">
+
+
+                            <label for="affection">感情狀態</label>
+                            <br>
+                            <select name="affection">
+                                <option value="? undefined:undefined ?"></option>
+                                <option value="不顯示">不顯示</option>
+                                <option value="單身">單身</option>
+                                <option value="一言難盡">一言難盡</option>
+                                <option value="穩定交往">穩定交往</option>
+                            </select>
+                            <br>
+                            <!--     <div class="error well well-small ng-binding ng-hide" ng-show="err.affection"></div> -->
+
+                            <label for="talent">專長興趣</label>
+                            <textarea class="form-control" name="talent" id="" placeholder="EX.喜歡看小說，可以推薦你很多好看的小說，常常在誠品看一下午的書XD。也喜歡聽一些抒情音樂。還有喜歡看一些港片，雖然有些從小到大一直重複看過N遍了...。"></textarea>
+
+                            <label for="club">曾參加過的社團</label>
+                            <textarea class="form-control" name="club" id="" placeholder="EX.校友會、創意創業學程、壘球系隊(雖然都沒去練XD)"></textarea>
+
+
+                            <label for="trouble">自己最近的困擾</label>
+                            <textarea class="form-control" name="trouble" id="" placeholder="EX.Dcard要怎麼宣傳，讓更多人知道>_<，讓大家喜歡Dcard這個交友平台。還有想努力把Dcard變得更好，讓我們的校園生活更美好，這是Dcard的使命。"></textarea>
+
+                            <label for="wanttotry">想嘗試的事情</label>
+                            <textarea class="form-control" name="wanttotry" id="" placeholder="EX.開一個萬人演場會，然後睡過頭忘記去唱歌。可以變身為超級賽亞人，保護這個地球。讓Dcard....變得跟facebook一樣，成為一個很多人想用的網站，讓這世界變得更美好。"></textarea>
+
+                            <label for="exchange">可以交換學習的才藝</label>
+                            <textarea class="form-control" name="exchange" id="" placeholder="EX.微積分、photoshop、英文、台語、Dcard創辦歷程辛酸分享、可以傾聽你的煩惱、可以分享一些以前經歷過的趣事或改變我一生的事、或是你什麼困擾可以跟我說，或許我剛好可以幫忙!"></textarea>
+
+                            <hr>
+                            <form id="headphoto-upload" action="/api/headphoto/upload" method="post" enctype="multipart/form-data" class="">
+                                <input class="form-control" type="hidden" name="_csrf" value="">
+                                <strong>裁切尚未完成</strong>
+                                <label>請上傳個人照片，並進行裁切，最後請按確定裁切，才算完成，照片大小請小於 2MB (限JPG,PNG)（照片限畫面清晰，單獨正面本人照，不准戴墨鏡）
+                                </label>
+                                <input class="form-control" id="headphoto-file" name="headphoto" type="file" style="display:none">
+
+                                <div class="input-group">
+                                    <input id="photoCover" class="form-control" type="text">
+                                    <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" onclick="$('#headphoto-file').click();">選取檔案</button>
+                                     </span>
+                                    <span class="input-group-btn">
+                                         <button class="btn btn-default">上傳</button>
+                                     </span>
+                                    <span class="input-group-btn">
+                                         <button type="button" class="btn btn-primary ng-hide">確定裁切</button>
+                                     </span>
+                                </div>
+                                <!-- <button ng-click="photoUpload()">上傳照片</button> (上傳後請務必裁切後再送??-->
+                            </form>
+                            <strong class="ng-hide">裁切完成!</strong>
+                            <button class="btn ng-hide">重新裁切</button>
+                            <!--放照片的地方preview，記得之後把preview的class加來這邊 -->
+                            <div ng-hide="cropped" class="">
+                                <img-cropped src="" selected="selected(cords)" cords="cords" realworldwidth="realworldwidth" class="ng-isolate-scope"></img-cropped>
+                            </div>
+                            <img style="width:300px;" ng-show="cropped" ng-src="" alt="" class="ng-hide">
+                            <!--放照片的地方preview，記得之後把preview的class加來這邊 -->
+                            <hr>
+                            <div class="alert alert-warning">
+                                <span>請確認個欄填答是否超過五十字，字數太少將會退回重新填寫!</span>
+                            </div>
+                            <div class="alert alert-success">
+                                <span>送出即代表閱畢且認同<a target="_blank" href="user.txt">使用者條款</a>與<a target="_blank" href="privacy.txt">隱私權條款</a></span>
+                            </div>
+                            <button ng-click="submitApply()" class="btn btn-primary"><span class="ladda-label">送出</span><span class=""></span>
+                            </button>
+                        <!-- 從這邊下面開始是註冊的資料表 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <!---->
+        <script>
+        angular.module('MyApp', ['timer']);
+        </script>
+</body>
+
+</html>
